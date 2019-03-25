@@ -1,4 +1,6 @@
 require 'bundler/setup'
+require 'pry'
+
 Bundler.require
 
 require 'active_record'
@@ -10,6 +12,10 @@ Dir[File.join(File.dirname(__FILE__), "../lib/support", "*.rb")].each {|f| requi
 DBRegistry[ENV["PLAYLISTER_ENV"]].connect!
 DB = ActiveRecord::Base.connection
 
+#old_logger = ActiveRecord::Base.logger
+
+
 if ENV["PLAYLISTER_ENV"] == "test"
   ActiveRecord::Migration.verbose = false
+  #ActiveRecord::Base.logger = 1
 end
